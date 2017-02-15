@@ -37,7 +37,6 @@ public class VPCrte
         // for each line of "machine code":
 		while((buff = br.readln) != null)
         {
-		// here I am going to need to seperate the input again???
             if (debug)
             {
                 // display info about code as it is loaded into memory
@@ -73,15 +72,15 @@ public class VPCrte
             if (debug)
             {
                 // display info about code as it is executed
-				// runProg:  MEMORY[07] = 0690, opcode = 06, operand = 90, GPREG = 0001 (LOAD)
+		// runProg:  MEMORY[07] = 0690, opcode = 06, operand = 90, GPREG = 0001 (LOAD)
                 System.out.println("runProg: Memory[" + PCREG + "] = " + pad(operator,2) + pad(operand,2)
                     				+ ", opcode = " + pad(operator,2) + ", operand = " + pad(operand,2) 
-									+ ", GPREG = " + GPREG + " (" + opar[operator] + ")");
+						+ ", GPREG = " + GPREG + " (" + opar[operator] + ")");
             }
 
             // handle all of the opcodes with a large if/else if/else if/...
             // or switch statement.
-			// HALT, ADD, SUB, MLT, DIV, ILOAD, LOAD, STOR, READ, WRITE, BR, BZ, BN, DUMP
+           // HALT, ADD, SUB, MLT, DIV, ILOAD, LOAD, STOR, READ, WRITE, BR, BZ, BN, DUMP
 			if(opcode = HALT)
 			{
 			    System.exit(0);

@@ -50,9 +50,6 @@ public class Assemble
 
             operand = Integer.parseInt(stOperand);
 
-			//
-			// This does not work right
-			//
             for(int i = 0; i < opar.length; i++)
             {
                 if(operator.equals(opar[i]))
