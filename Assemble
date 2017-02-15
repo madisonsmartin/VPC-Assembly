@@ -1,0 +1,96 @@
+import java.io.*;
+import java.util.*;
+
+public class Assemble
+{
+    public static String pad(int n, int w)
+    {
+        //n = number and w = width. I chose to parse n to a String and
+        //compare ns.length() to w to pad the begining with the appropriate
+        //number of 0's.
+
+        String ns = String.valueOf(n);
+
+        while(ns.length() < (w))
+        {
+            ns = "0" + ns;
+        }
+        return ns;
+    }
+
+    static void readSrc(String fname) throws IOException
+    {
+        FileReader fr = new FileReader(fname);
+        BufferedReader br = new BufferedReader(fr);
+        StringTokenizer st;
+
+        String[] opar = {"HALT", "ADD", "SUB", "MLT", "DIV", "ILOAD", "LOAD", "STOR", "READ", "WRITE", "BR", "BN", "DUMP"};
+
+        String buff;
+        String operator;
+        String stOperand;
+
+        int operand = -1;
+        int lnNum = -1;
+
+        while((buff = br.readLine()) != null)
+        {
+            //Counting here will give you the count of every line.
+            //lnNum will need to initialized to -1.
+            lnNum++;
+            st = new StringTokenizer(buff);
+
+            if(buff.length()==0)
+            {continue;}
+            if(buff.substring(0,1).equals("#"))
+            {continue;}
+
+            operator = st.nextToken();
+            stOperand = st.nextToken();
+
+            operand = Integer.parseInt(stOperand);
+
+			//
+			// This does not work right
+			//
+            for(int i = 0; i < opar.length; i++)
+            {
+                if(operator.equals(opar[i]))
+                {
+                System.out.println(pad(i,2) + pad(operand,2));
+                    break;
+                }
+                if(i == opar.length-1 && !operator.equals(opar[i]))
+                {
+                    System.out.println("\n\t***Invalid Operator at line " +
+                                       lnNum +"***\n");
+                    System.exit(0);
+                }
+            }
+
+            if(operand < 0 | operand > 99)
+            {
+                System.out.println("\n\t***Invalid Operand at line " +
+                                   lnNum +"***\n");
+            }
+            //Counting lnNum here will count the lines of usable code
+            //lnNum will need to be intialized to 0
+            //lnNum++;
+        }
+    }
+
+    public static void main(String argv[]) throws IOException
+    {
+       //pad(5,4);
+        if (argv.length != 1)
+        {
+            System.out.println("usage:  java Assemble INPUTFILE");
+            System.exit(0);
+        }
+
+        readSrc(argv[0]);
+    }
+}
+
+
+
